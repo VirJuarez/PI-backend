@@ -20,6 +20,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const {Diet} = require("./src/db");
+const port = process.env.PORT
 
 
 
@@ -27,7 +28,7 @@ const {Diet} = require("./src/db");
 conn.sync({ force: false }).then(() => {
   let dietasDefault = ["gluten free","ketogenic","lacto ovo vegetarian","vegan","pescatarian","paleolithic","primal","fodmap friendly","whole 30"]
   dietasDefault.forEach(async (el) => await Diet.findOrCreate({where:{name:el}}))
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(port, () => {
+    console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
 });
